@@ -1,0 +1,738 @@
+body {
+  box-sizing: border-box; }
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit; }
+
+ul[class],
+ol[class] {
+  padding: 0; }
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0; }
+
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  text-rendering: optimizeLegibility;
+  text-rendering: geometricPrecision;
+  line-height: 1.5; }
+
+ul[class],
+ol[class] {
+  list-style: none; }
+
+a:not([class]) {
+  text-decoration-skip-ink: auto; }
+
+img {
+  max-width: 100%;
+  display: block; }
+
+input,
+button,
+textarea,
+select {
+  font: inherit; }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important; } }
+
+html {
+  position: relative;
+  color: #2c2420;
+  font-family: "Avenir Next Cyr", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  scroll-behavior: smooth; }
+
+@font-face {
+  font-family: 'Avenir Next Cyr';
+  src: url("./fonts/subset-AvenirNextCyr-Regular.woff2") format("woff2"), url("./fonts/subset-AvenirNextCyr-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Avenir Next Cyr';
+  src: url("./fonts/subset-AvenirNextCyr-Medium.woff2") format("woff2"), url("./fonts/subset-AvenirNextCyr-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Avenir Next Cyr';
+  src: url("./fonts/subset-AvenirNextCyr-Bold.woff2") format("woff2"), url("./fonts/subset-AvenirNextCyr-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'TT Lovelies Script';
+  src: url("./fonts/subset-TTLoveliesScript.woff2") format("woff2"), url("./fonts/subset-TTLoveliesScript.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ddcba4;
+  background-image: url("./img/bgs/wrapper-bg.svg");
+  background-size: cover; }
+
+.scroll-spy {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 2.5rem;
+  right: 5rem;
+  right: 2rem;
+  z-index: 3;
+  width: 1px;
+  height: 100%;
+  background-color: rgba(131, 120, 111, 0.2); }
+
+.scroll-spy__tracker {
+  position: absolute;
+  top: 2.5rem;
+  transform: translateX(-50%);
+  width: 1.75rem;
+  padding: 0.5rem 0;
+  background-color: #ffffff;
+  cursor: pointer; }
+  .scroll-spy__tracker:hover svg {
+    fill: rgba(131, 120, 111, 0.75); }
+  .scroll-spy__tracker:active svg {
+    fill: rgba(131, 120, 111, 0.5); }
+
+.scroll-spy__tracker svg {
+  fill: #83786f;
+  transition: all 0.25s ease-out; }
+
+.scroll-spy__list {
+  position: absolute;
+  right: 1rem;
+  top: 2.5rem;
+  text-align: right; }
+
+.scroll-spy__item {
+  transition: all 0.25s ease-in-out; }
+
+.scroll-spy__item--current .scroll-spy__link {
+  color: #ddcba4;
+  background-color: rgba(131, 120, 111, 0); }
+
+.scroll-spy__item--current .scroll-spy__link:hover {
+  color: #ffffff; }
+
+.scroll-spy__link {
+  display: block;
+  padding: 0.25rem 1rem;
+  color: #382f2d;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-radius: 4px;
+  transition: all 0.25s ease-out; }
+  .scroll-spy__link:hover {
+    background-color: #ddcba4; }
+  .scroll-spy__link:active {
+    color: rgba(94, 81, 77, 0.5); }
+
+.app {
+  position: relative;
+  height: 800px;
+  width: 1280px;
+  display: flex;
+  box-shadow: 0 0 2rem rgba(56, 47, 45, 0.5); }
+
+.app::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 8px;
+  z-index: 2;
+  height: 5rem;
+  background-image: linear-gradient(to bottom, #ffffff, transparent); }
+
+.login-pane {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  width: 22rem;
+  flex-basis: 22rem;
+  flex-grow: 1;
+  flex-shrink: 0;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #83786f;
+  background-image: url("./img/bgs/will-made.png");
+  background-size: contain;
+  background-position: top right;
+  background-repeat: no-repeat; }
+
+.wm-form {
+  margin-top: 6rem; }
+
+.wm-form__input {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  color: #ffffff;
+  font-weight: 500;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.125);
+  transition: all 0.25s ease-out; }
+  .wm-form__input::placeholder {
+    color: #5e514d;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase; }
+  .wm-form__input:hover {
+    border: 2px solid rgba(255, 255, 255, 0.5); }
+  .wm-form__input:focus {
+    border: 2px solid white;
+    box-shadow: 0 0 0.25rem rgba(56, 47, 45, 0.25);
+    outline: none; }
+
+.wm-form__link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  margin-left: 2px;
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.25s ease-out; }
+  .wm-form__link:hover {
+    color: #ddcba4; }
+  .wm-form__link:active {
+    color: #5e514d; }
+
+.wm-form__submit {
+  display: block;
+  margin-top: 3rem;
+  padding: 0.675rem;
+  width: 100%;
+  color: #382f2d;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 4px;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s ease-out; }
+  .wm-form__submit:focus {
+    outline: none; }
+  .wm-form__submit:hover {
+    transform: translateY(-1px);
+    background-color: #ffffff;
+    background-color: #ddcba4;
+    box-shadow: 0 0 1.5rem rgba(56, 47, 45, 0.5); }
+  .wm-form__submit:active {
+    transform: translateY(1px);
+    color: #5e514d;
+    background-color: #ddcba4;
+    box-shadow: 0 0 0.25rem rgba(56, 47, 45, 0.25); }
+
+.wm-form__chk-label {
+  position: relative;
+  display: block;
+  margin-top: 1rem;
+  padding-left: 2.25rem;
+  color: #ffffff;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.25s ease-out; }
+  .wm-form__chk-label:hover {
+    color: #ddcba4; }
+  .wm-form__chk-label:active {
+    color: #5e514d; }
+  .wm-form__chk-label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    display: block;
+    height: 1rem;
+    width: 1.75rem;
+    border-radius: 0.5rem;
+    background-color: rgba(94, 81, 77, 0.75);
+    transition: all 0.25s ease-out; }
+  .wm-form__chk-label::after {
+    content: '';
+    position: absolute;
+    left: 0.125rem;
+    top: 0.125rem;
+    z-index: 2;
+    display: block;
+    height: 0.75rem;
+    width: 0.75rem;
+    border-radius: 50%;
+    background-color: rgba(131, 120, 111, 0.75);
+    transition: all 0.25s ease-out; }
+
+.wm-form__checkbox {
+  display: none; }
+  .wm-form__checkbox:checked + .wm-form__chk-label::before {
+    background-color: white; }
+  .wm-form__checkbox:checked + .wm-form__chk-label::after {
+    left: 0.875rem;
+    background-color: #83786f; }
+
+.popup-window {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9999; }
+
+.popup-window__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: rgba(221, 203, 164, 0.75); }
+
+.popup-window__body {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  text-align: center;
+  background-color: #83786f;
+  box-shadow: 0 0 1px #382f2d, 0 0 2rem rgba(56, 47, 45, 0.75); }
+
+.popup-window__message {
+  color: #ffffff; }
+
+.button {
+  display: inline-block;
+  margin-top: 3rem;
+  padding: 0.675rem;
+  width: 12rem;
+  color: #382f2d;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 4px;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s ease-out; }
+  .button:focus {
+    outline: none; }
+  .button:hover {
+    transform: translateY(-1px);
+    background-color: #ffffff;
+    background-color: #ddcba4;
+    box-shadow: 0 0 1.5rem rgba(56, 47, 45, 0.5); }
+  .button:active {
+    transform: translateY(1px);
+    color: #5e514d;
+    background-color: #ddcba4;
+    box-shadow: 0 0 0.25rem rgba(56, 47, 45, 0.25); }
+
+.version {
+  position: absolute;
+  bottom: 4rem;
+  color: #ddcba4;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase; }
+
+.landing {
+  position: relative;
+  flex-basis: 100%;
+  padding: 0 5rem;
+  padding-bottom: 9rem;
+  background-color: #ffffff;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-behavior: smooth; }
+  .landing::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent; }
+  .landing::-webkit-scrollbar-thumb {
+    background-color: #83786f; }
+  .landing::-webkit-scrollbar-track {
+    background-color: #f8f5ed; }
+
+.landing__header {
+  margin-bottom: 7rem;
+  padding: 5rem 0;
+  padding-right: 10rem;
+  background-image: url("./img/landing/header-bg.svg");
+  background-repeat: no-repeat;
+  background-position: bottom right; }
+
+.landing__section {
+  padding: 4rem 0;
+  padding-right: 10rem; }
+  .landing__section--components {
+    background-image: url("./img/landing/components-bg.svg");
+    background-repeat: no-repeat;
+    background-position: top 200px right; }
+
+.landing__features {
+  margin-top: 3rem;
+  columns: 2;
+  column-gap: 2rem; }
+
+.title-1 {
+  margin-bottom: 6rem;
+  color: #ddcba4;
+  font-size: 3rem;
+  line-height: 1;
+  text-transform: uppercase; }
+
+.title-1 em {
+  color: #382f2d;
+  font-family: "TT Lovelies Script";
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none; }
+
+.title-2 {
+  margin-bottom: 3rem;
+  color: #ddcba4;
+  font-size: 2rem;
+  font-family: "Avenir Next Cyr", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase; }
+
+.title-2 em {
+  display: block;
+  color: #382f2d;
+  font-family: "TT Lovelies Script";
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none; }
+
+.section-text {
+  margin-bottom: 1.5rem; }
+
+.section-text strong {
+  color: #5e514d;
+  font-weight: 700; }
+
+.section-image {
+  margin: 4rem 0;
+  margin-right: -5rem; }
+
+.section-image svg {
+  width: 100%; }
+
+.numbered-feature {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+  break-inside: avoid; }
+
+.numbered-feature__number {
+  margin-right: 1.5rem;
+  color: #ddcba4;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1; }
+
+.numbered-feature__number::before {
+  content: '#'; }
+
+.numbered-feature__text {
+  font-size: 0.875rem; }
+
+.numbered-feature__text em {
+  color: #5e514d; }
+
+ul.scheme {
+  position: relative;
+  margin: 3rem 0;
+  list-style: none; }
+
+.scheme::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  height: 100%;
+  width: 1px;
+  background-image: repeating-linear-gradient(to bottom, #83786f, #83786f 8px, #ffffff 8px, #ffffff 16px);
+  background-repeat: repeat-y; }
+
+.scheme__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0;
+  margin-left: 50%;
+  padding: 0; }
+
+.scheme__icon {
+  position: absolute;
+  left: -2.5rem;
+  top: 0;
+  height: 5rem;
+  width: 5rem;
+  padding: 1.5rem;
+  border: 1px solid #83786f;
+  border-radius: 50%;
+  background-color: #f8f5ed;
+  box-shadow: inset -4px -4px #ffffff, -4px -4px #f8f5ed; }
+
+.scheme__icon svg {
+  fill: #ddcba4; }
+
+.scheme__title {
+  padding: 1rem 3rem;
+  color: #382f2d;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase; }
+
+.scheme__description {
+  position: relative;
+  margin: 0;
+  padding: 1rem 1.5rem;
+  padding-left: 3rem;
+  color: #5e514d;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-top: 1px solid #83786f; }
+
+.scheme__description::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -5px;
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  background-color: #83786f; }
+
+.scheme__description::after {
+  content: '';
+  position: absolute;
+  bottom: -2rem;
+  right: -1rem;
+  z-index: -1;
+  height: calc(100% + 5rem);
+  width: 100%; }
+
+.scheme__item:nth-child(2n + 1) {
+  margin-left: 0;
+  margin-right: 50%;
+  border: none; }
+  .scheme__item:nth-child(2n + 1) .scheme__icon {
+    left: auto;
+    right: -2.5rem; }
+  .scheme__item:nth-child(2n + 1) .scheme__title {
+    padding-left: 1.5rem; }
+  .scheme__item:nth-child(2n + 1) .scheme__description {
+    padding-left: 1.5rem;
+    padding-right: 3rem; }
+  .scheme__item:nth-child(2n + 1) .scheme__description::before {
+    right: auto;
+    left: 0; }
+  .scheme__item:nth-child(2n + 1) .scheme__description::after {
+    right: auto;
+    left: -1rem; }
+
+.wm-banner {
+  position: relative;
+  z-index: 9;
+  height: 190px;
+  margin-left: -5rem;
+  margin-right: -15rem;
+  margin-bottom: -10rem; }
+
+.wm-banner__left {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: calc(50% - 0.5rem);
+  padding: 2rem 5rem;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  background-color: #5e514d;
+  transition: all 0.25s ease-out;
+  overflow: hidden; }
+  .wm-banner__left .wm-banner__caption {
+    margin-right: 3rem; }
+  .wm-banner__left .wm-banner__description {
+    right: -12rem;
+    color: #ddcba4; }
+  .wm-banner__left .wm-banner__title {
+    color: #ffffff; }
+  .wm-banner__left .wm-banner__title em {
+    color: #ddcba4; }
+  .wm-banner__left .wm-banner__link {
+    color: #ddcba4; }
+  .wm-banner__left:hover {
+    z-index: 3;
+    width: calc(70% - 0.5rem); }
+    .wm-banner__left:hover .wm-banner__description {
+      right: 0;
+      opacity: 1; }
+  .wm-banner__left:hover ~ .wm-banner__right {
+    padding-right: 3rem; }
+
+.wm-banner__right {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  width: calc(50% - 0.5rem);
+  padding: 2rem 5rem;
+  padding-right: 10rem;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  background-color: #ddcba4;
+  transition: all 0.25s ease-out;
+  overflow: hidden;
+  direction: rtl; }
+  .wm-banner__right .wm-banner__caption {
+    margin-left: 5rem;
+    direction: ltr; }
+  .wm-banner__right .wm-banner__description {
+    direction: ltr; }
+  .wm-banner__right .wm-banner__title {
+    color: #83786f; }
+  .wm-banner__right .wm-banner__title em {
+    color: #382f2d; }
+  .wm-banner__right .wm-banner__link {
+    color: #382f2d; }
+  .wm-banner__right .wm-banner__link:hover {
+    background-color: rgba(56, 47, 45, 0.25); }
+  .wm-banner__right .wm-banner__link::after {
+    background-image: url("./img/deco/more-arrow--dark.svg"); }
+  .wm-banner__right:hover {
+    padding-right: 3rem;
+    width: calc(70% - 0.5rem); }
+    .wm-banner__right:hover .wm-banner__description {
+      opacity: 1; }
+
+.wm-banner__caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 200px;
+  width: 200px; }
+
+.wm-banner__title {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  user-select: none; }
+
+.wm-banner__title em {
+  display: block;
+  font-family: "TT Lovelies Script";
+  font-weight: 400;
+  line-height: 1;
+  text-transform: none; }
+
+.wm-banner__link {
+  position: relative;
+  display: inline-block;
+  margin-left: -1.5rem;
+  padding: 0.26rem 1.5rem;
+  padding-bottom: 0.24rem;
+  line-height: 2;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: all 0.25s ease-out; }
+
+.wm-banner__link::after {
+  content: '';
+  position: absolute;
+  right: 2rem;
+  top: 0;
+  display: block;
+  height: 100%;
+  width: 0.75rem;
+  background-image: url("./img/deco/more-arrow.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: all 0.25s ease-out; }
+
+.wm-banner__link:hover {
+  background-color: rgba(255, 255, 255, 0.25); }
+
+.wm-banner__link:hover::after {
+  right: 1.5rem; }
+
+.wm-banner__description {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 200px;
+  min-width: 200px;
+  color: #382f2d;
+  opacity: 0;
+  transition: all 0.325s ease-out;
+  user-select: none; }
+
+.wm-banner__desc-title {
+  font-size: 0.875rem;
+  text-transform: uppercase; }
+
+.wm-banner__desc-text {
+  font-size: 0.8rem; }
+
+.landing-logo {
+  width: 12rem;
+  margin-bottom: 6rem; }
+
+.landing-logo svg {
+  width: 100%; }
